@@ -1,6 +1,4 @@
--- SQLBook: Code
--- Active: 1674656074657@@127.0.0.1@3306@projectlibrarymanagement
-
+CREATE DATABASE projectlibrarymanagement
 create Table tbl_book (
     Book_ID INT PRIMARY KEY,
     Book_Title VARCHAR(100),
