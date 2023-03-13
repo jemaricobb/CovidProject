@@ -1,0 +1,266 @@
+-- SQLBook: Code
+-- Active: 1674656074657@@127.0.0.1@3306@projectlibrarymanagement
+
+create Table tbl_book (
+    Book_ID INT PRIMARY KEY,
+    Book_Title VARCHAR(100),
+    Book_Author VARCHAR(100)
+);
+CREATE Table tbl_library_branch (
+    Branch_ID INT PRIMARY KEY,
+    Branch_Name VARCHAR(100),
+    Branch_Address VARCHAR(225)
+);
+CREATE Table tbl_patron (
+    Patron_ID INT PRIMARY KEY,
+    Patron_Name VARCHAR(100),
+    Patron_Address VARCHAR(225),
+    Patron_Number VARCHAR(25)
+);
+CREATE TABLE tbl_book_checkout(
+    Checkout_Id INT PRIMARY KEY NOT NULL,
+    Book_ID INT NOT NULL,
+    Branch_ID INT NOT NULL,
+    Patron_ID INT NOT NULL,
+    DateOut VARCHAR(50) NOT NULL,
+	DueDate VARCHAR(50) NOT NULL,
+    FOREIGN KEY (Book_ID) REFERENCES tbl_book(Book_ID) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (Branch_ID) REFERENCES tbl_library_branch(Branch_ID) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (Patron_ID) REFERENCES tbl_patron(Patron_ID) ON UPDATE CASCADE ON DELETE CASCADE
+);
+CREATE TABLE tbl_book_copies (
+    Copy_ID INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    Book_ID INT NOT NULL,
+    Branch_ID INT NOT NULL,
+    No_of_copies INT NOT NULL,
+    FOREIGN KEY (Book_ID) REFERENCES tbl_book(Book_ID) ON UPDATE CASCADE ON DELETE CASCADE,
+    FOREIGN KEY (Branch_ID) REFERENCES tbl_library_branch(Branch_ID) ON UPDATE CASCADE ON DELETE CASCADE
+    );
+INSERT INTO tbl_book
+(Book_ID, Book_Title, Book_Author)
+VALUES
+(1, "To Kill a Mockingbird", "Harper Lee"),
+(2, "The Great Gatsby", "F. Scott Fitzgerald"),
+(3, "The Catcher in the Rye", "J.D. Salinger"),
+(4, "The Lord of the Rings", "J.R.R. Tolkien"),
+(5, "The Hobbit", "J.R.R. Tolkien"),
+(6, "The Diary of a Young Girl", "Anne Frank"),
+(7, "The Alchemist", "Paulo Coelho"),
+(8, "The Old Man and the Sea", "Ernest Hemingway"),
+(9, "The Picture of Dorian Gray", "Oscar Wilde"),
+(10, "The Stranger", "Albert Camus"),
+(11, "Animal Farm", "George Orwell"),
+(12, "The Grapes of Wrath", "John Steinbeck"),
+(13, "The Sun Also Rises", "Ernest Hemingway"),
+(14, "The Cat's Table", "Michael Ondaatje"),
+(15, "The Handmaid's Tale", "Margaret Atwood"),
+(16, "The Road", "Cormac McCarthy"),
+(17, "The Bell Jar", "Sylvia Plath"),
+(18, "The Kite Runner", "Khaled Hosseini"),
+(19, "The Nightingale", "Kristin Hannah"),
+(20, "The Immortal Life of Henrietta Lacks", "Rebecca Skloot");
+INSERT INTO tbl_library_branch
+(Branch_ID,Branch_Name,Branch_Address)
+VALUES
+(1, "Main Library", "123 Main St, Anytown USA 12345"),
+(2, "North Branch Library", "456 North Ave, Anytown USA 12346"),
+(3, "South Branch Library", "789 South Blvd, Anytown USA 12347"),
+(4, "East Branch Library", "321 East St, Anytown USA 12348");
+INSERT INTO tbl_patron
+(Patron_ID,Patron_Name,Patron_Address,Patron_Number)
+VALUES
+(111, "Adam Smith", "1 Park Street, Anytown USA 12345", "(555) 555-1111"),
+(222, "Sara Johnson", "2 Elm Avenue, Anytown USA 12346", "(555) 555-2222"),
+(333, "Jessica Williams", "3 Oak Street, Anytown USA 12347", "(555) 555-3333"),
+(444, "Michael Brown", "4 Pine Avenue, Anytown USA 12348", "(555) 555-4444"),
+(555, "Emily Davis", "5 Birch Street, Anytown USA 12349", "(555) 555-5555"),
+(666, "Jacob Garcia", "6 Cedar Road, Anytown USA 12350", "(555) 555-6666");
+INSERT INTO tbl_book_checkout
+(Book_ID,Patron_ID,Branch_ID,DateOut,DueDate)
+VALUES
+("7", "333", "1", "01/01/2022", "01/15/2022"),
+("15", "333", "1", "01/01/2022", "01/15/2022"),
+("12", "666", "1", "01/02/2022", "01/16/2022"),
+("17", "444", "1", "01/02/2022", "01/16/2022"),
+("19", "111", "1", "01/02/2022", "01/16/2022"),
+("20", "222", "1", "01/02/2022", "01/16/2022"),
+("1", "222", "1", "01/02/2022", "01/16/2022"),
+("4", "222", "1", "01/02/2022", "01/16/2022"),
+("4", "444", "1", "01/03/2022", "01/17/2022"),
+("6", "444", "1", "01/03/2022", "01/17/2022"),
+("10", "444", "1", "01/03/2022", "01/17/2022"),
+("3", "444", "1", "01/03/2022", "01/17/2022"),
+("14", "666", "1", "01/04/2022", "01/18/2022"),
+("13", "666", "1", "01/04/2022", "01/18/2022"),
+("8", "222", "1", "01/05/2022", "01/19/2022"),
+("15", "222", "1", "01/05/2022", "01/19/2022"),
+("8", "666", "1", "01/05/2022", "01/19/2022"),
+("1", "444", "2", "01/02/2022", "01/16/2022"),
+("2", "444", "2", "01/02/2022", "01/16/2022"),
+("5", "444", "2", "01/02/2022", "01/16/2022"),
+("7", "444", "2", "01/02/2022", "01/16/2022"),
+("11", "444", "2", "01/02/2022", "01/16/2022"),
+("17", "111", "2", "01/03/2022", "01/17/2022"),
+("13", "111", "2", "01/03/2022", "01/17/2022"),
+("11", "555", "2", "01/03/2022", "01/17/2022"),
+("6", "555", "2", "01/03/2022", "01/17/2022"),
+("8", "555", "2", "01/03/2022", "01/17/2022"),
+("1", "555", "2", "01/03/2022", "01/17/2022"),
+("11","333",'2',"01/04/2022", "01/18/2022"),
+("1","333",'2',"01/04/2022", "01/18/2022"),
+("15", "111", '2', "01/04/2022", "01/18/2022"),
+("12", "333", '2', "01/04/2022", "01/18/2022"),
+("18", "333", '2', "01/04/2022", "01/18/2022"),
+("3", "333", '2', "01/04/2022", "01/18/2022"),
+("17", "111", '2', "01/05/2022", "01/19/2022"),
+("4", "111", '2', "01/05/2022", "01/19/2022"),
+("9", "555", '2', "01/05/2022", "01/19/2022"),
+("20", "555", '2', "01/05/2022", "01/19/2022"),
+("2", "555", '2', "01/05/2022", "01/19/2022"),
+("18", "222", '3', "01/02/2022", "01/16/2022"),
+("1", "222", '3', "01/02/2022", "01/16/2022"),
+("5", "111", '3', "01/02/2022", "01/16/2022"),
+("7", "666", '3', "01/03/2022", "01/17/2022"),
+("3", "666", '3', "01/03/2022", "01/17/2022"),
+("17", "666", '3', "01/03/2022", "01/17/2022"),
+("14", "666", '3', "01/03/2022", "01/17/2022"),
+("17", "555", '3', "01/04/2022", "01/18/2022"),
+("18", "555", '3', "01/04/2022", "01/18/2022"),
+("13", "555", '3', "01/04/2022", "01/18/2022"),
+("12", "555", '3', "01/04/2022", "01/18/2022"),
+("10", "444", '3', "01/04/2022", "01/18/2022"),
+("12", "444", '3', "01/04/2022", "01/18/2022"),
+("15", "111", '3', "01/05/2022", "01/19/2022"),
+("20", "666", '3', "01/05/2022", "01/19/2022"),
+("1", "666", '3', "01/05/2022", "01/19/2022"),
+("7", "666", '3', "01/05/2022", "01/19/2022"),
+("12", "555", '4', "01/02/2022", "01/16/2022"),
+("20", "555", '4', "01/02/2022", "01/16/2022"),
+("17", "555", '4', "01/02/2022", "01/16/2022"),
+("3", "444", '4', "01/03/2022", "01/17/2022"),
+("4","666",'4',"01/03/2022", "01/17/2022"),
+("10","666",'4',"01/03/2022", "01/17/2022"),
+('9', '111', '4', '01/03/2022', '01/17/2022'),
+('12', '222', '4', '01/04/2022', '01/18/2022'),
+('18', '222', '4', '01/04/2022', '01/18/2022'),
+('11', '222', '4', '01/04/2022', '01/18/2022'),
+('12', '222', '4', '01/04/2022', '01/18/2022'),
+('3', '555', '4', '01/04/2022', '01/18/2022'),
+('18', '666', '4', '01/04/2022', '01/18/2022'),
+('9', '444', '4', '01/05/2022', '01/19/2022'),
+('12', '444', '4', '01/05/2022', '01/19/2022'),
+('7', '111', '4', '01/05/2022', '01/19/2022'),
+('1', '111', '4', '01/05/2022', '01/19/2022');
+INSERT INTO tbl_book_copies
+(Book_ID,Branch_Id,No_of_copies)
+VALUES
+('1', '1', '10'),
+('2', '1', '5'),
+('3', '1', '7'),
+('4', '1', '12'),
+('5', '1', '8'),
+('6', '1', '14'),
+('7', '1', '11'),
+('8', '1', '6'),
+('9', '1', '15'),
+('10', '1', '9'),
+('11', '1', '7'),
+('12', '1', '10'),
+('13', '1', '12'),
+('14', '1', '11'),
+('15', '1', '8'),
+('16', '1', '6'),
+('17', '1', '14'),
+('18', '1', '13'),
+('19', '1', '5'),
+('20', '1', '9'),
+('1', '2', '7'),
+('2', '2', '11'),
+('3', '2', '9'),
+('4', '2', '8'),
+('5', '2', '12'),
+('6', '2', '6'),
+('7', '2', '14'),
+('8', '2', '8'),
+('9', '2', '5'),
+('10', '2', '11'),
+('11', '2', '15'),
+('12', '2', '10'),
+('13', '2', '6'),
+('14', '2', '12'),
+('15', '2', '8'),
+('16', '2', '14'),
+('17', '2', '9'),
+('18', '2', '7'),
+('19', '2', '11'),
+('20', '2', '10'),
+('1', '3', '11'),
+('2', '3', '14'),
+('3', '3', '9'),
+('4', '3', '5'),
+('5', '3', '15'),
+('6', '3', '6'),
+('7', '3', '8'),
+('8', '3', '12'),
+('9', '3', '10'),
+('10', '3', '7'),
+('11', '3', '9'),
+('12', '3', '11'),
+('13', '3', '6'),
+('14', '3', '12'),
+('15', '3', '13'),
+('16', '3', '10'),
+('17', '3', '5'),
+('18', '3', '7'),
+('19', '3', '15'),
+('20', '3', '8'),
+('1', '4', '6'),
+('2', '4', '12'),
+('3', '4', '8'),
+('4', '4', '11'),
+('5', '4', '5'),
+('6', '4', '13'),
+('7', '4', '10'),
+('8', '4', '7'),
+('9', '4', '7'),
+('10', '4', '10'),
+('11', '4', '9'),
+('12', '4', '14'),
+('13', '4', '6'),
+('14', '4', '8'),
+('15', '4', '5'),
+('16', '4', '12'),
+('17', '4', '11'),
+('18', '4', '15'),
+('19', '4', '5'),
+('20', '4', '13');
+CREATE PROCEDURE FindBranchWithMostBooks()
+BEGIN
+    SELECT b.Branch_Name, SUM(bc.No_of_copies) AS Total_Books
+    FROM tbl_library_branch AS b
+    JOIN tbl_book_copies AS bc ON b.Branch_ID = bc.Branch_ID
+    GROUP BY b.Branch_ID
+    ORDER BY Total_Books DESC
+    LIMIT 1;
+END;
+CALL FindBranchWithMostBooks();
+CREATE PROCEDURE FindUserWithMostCheckouts()
+BEGIN
+    SELECT tbl_patron.Patron_ID, tbl_patron.Patron_Name, COUNT(tbl_book_checkout.Book_ID) AS Books_Checked_Out
+    FROM tbl_patron
+    JOIN tbl_book_checkout ON tbl_patron.Patron_ID = tbl_book_checkout.Patron_ID
+    GROUP BY tbl_patron.Patron_ID, tbl_patron.Patron_Name
+    ORDER BY Books_Checked_Out DESC;
+END;
+
+CALL FindUserWithMostCheckouts();
+CREATE PROCEDURE FindMostCheckedOutBook()
+BEGIN
+  SELECT b.Book_ID, b.Book_Title, COUNT(*) AS Total_Checkouts
+  FROM tbl_book AS b
+  JOIN tbl_book_checkout AS bc ON b.Book_ID = bc.Book_ID
+  GROUP BY b.Book_ID
+  ORDER BY Total_Checkouts DESC
+  LIMIT 1;
+END;
+CALL FindMostCheckedOutBook();
