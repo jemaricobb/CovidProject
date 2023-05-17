@@ -262,3 +262,147 @@ BEGIN
   LIMIT 1;
 END;
 CALL FindMostCheckedOutBook();
+-- Additional entries for tbl_book
+INSERT INTO tbl_book
+(Book_ID, Book_Title, Book_Author)
+VALUES
+(21, "Pride and Prejudice", "Jane Austen"),
+(22, "To the Lighthouse", "Virginia Woolf"),
+(23, "Brave New World", "Aldous Huxley"),
+(24, "1984", "George Orwell"),
+(25, "The Odyssey", "Homer"),
+(26, "Moby-Dick", "Herman Melville"),
+(27, "Frankenstein", "Mary Shelley"),
+(28, "Jane Eyre", "Charlotte Brontë"),
+(29, "The Scarlet Letter", "Nathaniel Hawthorne"),
+(30, "Wuthering Heights", "Emily Brontë"),
+(31, "The Adventures of Tom Sawyer", "Mark Twain"),
+(32, "Alice's Adventures in Wonderland", "Lewis Carroll"),
+(33, "Dracula", "Bram Stoker"),
+(34, "The Count of Monte Cristo", "Alexandre Dumas"),
+(35, "War and Peace", "Leo Tolstoy"),
+(36, "Anna Karenina", "Leo Tolstoy"),
+(37, "Crime and Punishment", "Fyodor Dostoevsky"),
+(38, "The Brothers Karamazov", "Fyodor Dostoevsky"),
+(39, "Gone with the Wind", "Margaret Mitchell"),
+(40, "The Grapes of Wrath", "John Steinbeck"),
+(41, "One Hundred Years of Solitude", "Gabriel García Márquez"),
+(42, "The Catcher in the Rye", "J.D. Salinger"),
+(43, "The Lord of the Rings", "J.R.R. Tolkien"),
+(44, "The Hobbit", "J.R.R. Tolkien"),
+(45, "The Great Gatsby", "F. Scott Fitzgerald"),
+(46, "The Chronicles of Narnia", "C.S. Lewis"),
+(47, "The Little Prince", "Antoine de Saint-Exupéry"),
+(48, "The Divine Comedy", "Dante Alighieri"),
+(49, "Les Misérables", "Victor Hugo"),
+(50, "The Picture of Dorian Gray", "Oscar Wilde");
+
+-- Additional entries for tbl_library_branch
+INSERT INTO tbl_library_branch
+(Branch_ID, Branch_Name, Branch_Address)
+VALUES
+(5, "West Branch Library", "987 West Street, Anytown USA 12349"),
+(6, "Central Branch Library", "654 Central Avenue, Anytown USA 12350"),
+(7, "Downtown Branch Library", "321 Downtown Blvd, Anytown USA 12351"),
+(8, "Newtown Branch Library", "789 Newtown Road, Anytown USA 12352"),
+(9, "Parkside Branch Library", "543 Parkside Avenue, Anytown USA 12353"),
+(10, "Riverside Branch Library", "876 Riverside Drive, Anytown USA 12354"),
+(11, "Sunset Branch Library", "234 Sunset Lane, Anytown USA 12355"),
+(12, "Greenwood Branch Library", "678 Greenwood Road, Anytown USA 12356"),
+(13, "Hillside Branch Library", "910 Hillside Street, Anytown USA 12357"),
+(14, "Meadowview Branch Library", "123 Meadowview Avenue, Anytown USA 12358"),
+(15, "Oakside Branch Library", "456 Oakside Lane, Anytown USA 12359"),
+(16, "Valleyview Branch Library", "789 Valleyview Road, Anytown USA 12360"),
+(17, "Harbor Branch Library", "123 Harbor Street, Anytown USA 12361"),
+(18, "Mountainview Branch Library", "456 Mountainview Avenue, Anytown USA 12362"),
+(19, "Bayview Branch Library", "789 Bayview Drive, Anytown USA 12363"),
+(20, "Seaside Branch Library", "234 Seaside Lane, Anytown USA 12364"),
+(21, "Lakeview Branch Library", "567 Lakeview Road, Anytown USA 12365"),
+(22, "Springfield Branch Library", "890 Springfield Street, Anytown USA 12366"),
+(23, "Hillcrest Branch Library", "123 Hillcrest Avenue, Anytown USA 12367"),
+(24, "Maplewood Branch Library", "456 Maplewood Lane, Anytown USA 12368");
+
+-- Additional entries for tbl_book_copies
+INSERT INTO tbl_book_copies
+(Book_ID, Branch_ID, No_Of_Copies)
+VALUES
+(21, 5, 5),
+(22, 5, 10),
+(23, 6, 3),
+(24, 6, 7),
+(25, 7, 15),
+(26, 7, 2),
+(27, 8, 4),
+(28, 8, 9),
+(29, 9, 6),
+(30, 9, 8),
+(31, 10, 12),
+(32, 10, 10),
+(33, 11, 5),
+(34, 11, 6),
+(35, 12, 20),
+(36, 12, 18),
+(37, 13, 8),
+(38, 13, 5),
+(39, 14, 9),
+(40, 14, 7),
+(41, 15, 10),
+(42, 15, 3),
+(43, 16, 5),
+(44, 16, 12),
+(45, 17, 15),
+(46, 17, 4),
+(47, 18, 6),
+(48, 18, 10),
+(49, 19, 12),
+(50, 19, 8);
+
+-- Additional entries for tbl_borrower
+INSERT INTO tbl_borrower
+(Card_No, Borrower_Name, Borrower_Address, Borrower_Phone)
+VALUES
+(21, "Emily Brown", "789 Oak Street, Anytown USA 12369", "555-1111"),
+(22, "Michael Johnson", "456 Pine Avenue, Anytown USA 12370", "555-2222"),
+(23, "Sophia Davis", "123 Elm Road, Anytown USA 12371", "555-3333"),
+(24, "William Wilson", "789 Birch Lane, Anytown USA 12372", "555-4444"),
+(25, "Olivia Thompson", "456 Cedar Street, Anytown USA 12373", "555-5555"),
+(26, "James Lee", "123 Maple Avenue, Anytown USA 12374", "555-6666"),
+(27, "Ava Taylor", "789 Oak Street, Anytown USA 12375", "555-7777"),
+(28, "Emma Clark", "456 Pine Avenue, Anytown USA 12376", "555-8888"),
+(29, "Noah Hernandez", "123 Elm Road, Anytown USA 12377", "555-9999"),
+(30, "Isabella Moore", "789 Birch Lane, Anytown USA 12378", "555-0000");
+
+-- Additional entries for tbl_book_loans
+INSERT INTO tbl_book_loans
+(Book_ID, Branch_ID, Card_No, Date_Out, Due_Date)
+VALUES
+(21, 5, 21, '2023-05-15', '2023-05-22'),
+(22, 5, 22, '2023-05-15', '2023-05-22'),
+(23, 6, 23, '2023-05-15', '2023-05-22'),
+(24, 6, 24, '2023-05-15', '2023-05-22'),
+(25, 7, 25, '2023-05-15', '2023-05-22'),
+(26, 7, 26, '2023-05-15', '2023-05-22'),
+(27, 8, 27, '2023-05-15', '2023-05-22'),
+(28, 8, 28, '2023-05-15', '2023-05-22'),
+(29, 9, 29, '2023-05-15', '2023-05-22'),
+(30, 9, 30, '2023-05-15', '2023-05-22'),
+(31, 10, 21, '2023-05-15', '2023-05-22'),
+(32, 10, 22, '2023-05-15', '2023-05-22'),
+(33, 11, 23, '2023-05-15', '2023-05-22'),
+(34, 11, 24, '2023-05-15', '2023-05-22'),
+(35, 12, 25, '2023-05-15', '2023-05-22'),
+(36, 12, 26, '2023-05-15', '2023-05-22'),
+(37, 13, 27, '2023-05-15', '2023-05-22'),
+(38, 13, 28, '2023-05-15', '2023-05-22'),
+(39, 14, 29, '2023-05-15', '2023-05-22'),
+(40, 14, 30, '2023-05-15', '2023-05-22'),
+(41, 15, 21, '2023-05-15', '2023-05-22'),
+(42, 15, 22, '2023-05-15', '2023-05-22'),
+(43, 16, 23, '2023-05-15', '2023-05-22'),
+(44, 16, 24, '2023-05-15', '2023-05-22'),
+(45, 17, 25, '2023-05-15', '2023-05-22'),
+(46, 17, 26, '2023-05-15', '2023-05-22'),
+(47, 18, 27, '2023-05-15', '2023-05-22'),
+(48, 18, 28, '2023-05-15', '2023-05-22'),
+(49, 19, 29, '2023-05-15', '2023-05-22'),
+(50, 19, 30, '2023-05-15', '2023-05-22');
