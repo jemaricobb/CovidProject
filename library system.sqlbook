@@ -1,5 +1,5 @@
 CREATE DATABASE projectlibrarymanagement
-create Table tbl_book (
+CREATE Table tbl_book (
     Book_ID INT PRIMARY KEY,
     Book_Title VARCHAR(100),
     Book_Author VARCHAR(100)
@@ -16,7 +16,7 @@ CREATE Table tbl_patron (
     Patron_Number VARCHAR(25)
 );
 CREATE TABLE tbl_book_checkout(
-    Checkout_Id INT PRIMARY KEY NOT NULL,
+    Checkout_Id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
     Book_ID INT NOT NULL,
     Branch_ID INT NOT NULL,
     Patron_ID INT NOT NULL,
@@ -232,36 +232,6 @@ VALUES
 ('18', '4', '15'),
 ('19', '4', '5'),
 ('20', '4', '13');
-CREATE PROCEDURE FindBranchWithMostBooks()
-BEGIN
-    SELECT b.Branch_Name, SUM(bc.No_of_copies) AS Total_Books
-    FROM tbl_library_branch AS b
-    JOIN tbl_book_copies AS bc ON b.Branch_ID = bc.Branch_ID
-    GROUP BY b.Branch_ID
-    ORDER BY Total_Books DESC
-    LIMIT 1;
-END;
-CALL FindBranchWithMostBooks();
-CREATE PROCEDURE FindUserWithMostCheckouts()
-BEGIN
-    SELECT tbl_patron.Patron_ID, tbl_patron.Patron_Name, COUNT(tbl_book_checkout.Book_ID) AS Books_Checked_Out
-    FROM tbl_patron
-    JOIN tbl_book_checkout ON tbl_patron.Patron_ID = tbl_book_checkout.Patron_ID
-    GROUP BY tbl_patron.Patron_ID, tbl_patron.Patron_Name
-    ORDER BY Books_Checked_Out DESC;
-END;
-
-CALL FindUserWithMostCheckouts();
-CREATE PROCEDURE FindMostCheckedOutBook()
-BEGIN
-  SELECT b.Book_ID, b.Book_Title, COUNT(*) AS Total_Checkouts
-  FROM tbl_book AS b
-  JOIN tbl_book_checkout AS bc ON b.Book_ID = bc.Book_ID
-  GROUP BY b.Book_ID
-  ORDER BY Total_Checkouts DESC
-  LIMIT 1;
-END;
-CALL FindMostCheckedOutBook();
 -- Additional entries for tbl_book
 INSERT INTO tbl_book
 (Book_ID, Book_Title, Book_Author)
@@ -358,8 +328,8 @@ VALUES
 (50, 19, 8);
 
 -- Additional entries for tbl_borrower
-INSERT INTO tbl_borrower
-(Card_No, Borrower_Name, Borrower_Address, Borrower_Phone)
+INSERT INTO tbl_patron
+(Patron_ID,Patron_Name,Patron_Address,Patron_Number)
 VALUES
 (21, "Emily Brown", "789 Oak Street, Anytown USA 12369", "555-1111"),
 (22, "Michael Johnson", "456 Pine Avenue, Anytown USA 12370", "555-2222"),
@@ -373,8 +343,8 @@ VALUES
 (30, "Isabella Moore", "789 Birch Lane, Anytown USA 12378", "555-0000");
 
 -- Additional entries for tbl_book_loans
-INSERT INTO tbl_book_loans
-(Book_ID, Branch_ID, Card_No, Date_Out, Due_Date)
+INSERT INTO tbl_book_checkout
+(Book_ID, Branch_ID, Patron_ID, DateOut, DueDate)
 VALUES
 (21, 5, 21, '2023-05-15', '2023-05-22'),
 (22, 5, 22, '2023-05-15', '2023-05-22'),
@@ -406,3 +376,5 @@ VALUES
 (48, 18, 28, '2023-05-15', '2023-05-22'),
 (49, 19, 29, '2023-05-15', '2023-05-22'),
 (50, 19, 30, '2023-05-15', '2023-05-22');
+SELECT DATE_FORMAT(DateOut, '%m/%d/%Y') AS DateOut, DATE_FORMAT(DueDate, '%m/%d/%Y') AS DueDate
+FROM tbl_book_checkout;
